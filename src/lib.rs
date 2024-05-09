@@ -32,9 +32,10 @@ pub use crate::ns::{NetworkNamespace, NETNS_PATH, NONE_FS, SELF_NS_PATH};
 #[cfg(not(target_os = "freebsd"))]
 pub use crate::traffic_control::{
     QDiscDelRequest, QDiscGetRequest, QDiscHandle, QDiscNewRequest,
-    TrafficChainGetRequest, TrafficChainHandle, TrafficClassGetRequest,
-    TrafficClassHandle, TrafficFilterGetRequest, TrafficFilterHandle,
-    TrafficFilterNewRequest,
+    TrafficActionDelRequest, TrafficActionGetRequest, TrafficActionHandle,
+    TrafficActionKind, TrafficActionNewRequest, TrafficChainGetRequest,
+    TrafficChainHandle, TrafficClassGetRequest, TrafficClassHandle,
+    TrafficFilterGetRequest, TrafficFilterHandle, TrafficFilterNewRequest,
 };
 pub use crate::{
     addr::{
