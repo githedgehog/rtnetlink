@@ -3,12 +3,16 @@
 use netlink_packet_core::{NLM_F_CREATE, NLM_F_EXCL, NLM_F_REPLACE};
 use netlink_packet_route::tc::TcMessage;
 
+use crate::{
+    Handle, TrafficActionDelRequest, TrafficActionGetRequest,
+    TrafficActionNewRequest, TrafficChainDelRequest, TrafficChainNewRequest,
+};
+
 use super::{
     QDiscDelRequest, QDiscGetRequest, QDiscNewRequest, TrafficChainGetRequest,
     TrafficClassGetRequest, TrafficFilterDelRequest, TrafficFilterGetRequest,
     TrafficFilterNewRequest,
 };
-use crate::Handle;
 
 #[derive(Debug, Clone)]
 pub struct QDiscHandle(Handle);
@@ -139,9 +143,60 @@ impl TrafficChainHandle {
         TrafficChainHandle { handle, ifindex }
     }
 
+    pub fn add(&mut self) -> TrafficChainNewRequest {
+        TrafficChainNewRequest::new(self.handle.clone(), self.ifindex)
+    }
+
     /// Retrieve the list of chain (equivalent to
     /// `tc chain show dev <iface_name>`)
     pub fn get(&mut self) -> TrafficChainGetRequest {
         TrafficChainGetRequest::new(self.handle.clone(), self.ifindex)
+    }
+
+    pub fn del(&mut self) -> TrafficChainDelRequest {
+        TrafficChainDelRequest::new(self.handle.clone(), self.ifindex)
+    }
+}
+
+#[non_exhaustive]
+pub struct TrafficActionHandle {
+    handle: Handle,
+}
+
+impl TrafficActionHandle {
+    /// Create a new traffic action manipulation handle.
+    pub fn new(handle: Handle) -> Self {
+        TrafficActionHandle { handle }
+    }
+
+    /// Retrieve the list of actions.
+    ///
+    /// Equivalent to
+    ///
+    /// ```bash
+    /// tc action list actions $act_type
+    /// ```
+    pub fn get(&mut self) -> TrafficActionGetRequest {
+        TrafficActionGetRequest::new(self.handle.clone())
+    }
+
+    /// Add a new action.
+    ///
+    /// Equivalent to
+    /// ```bash
+    /// tc action add action $act_type $act_options index $index
+    /// ```
+    pub fn add(&mut self) -> TrafficActionNewRequest {
+        TrafficActionNewRequest::new(self.handle.clone())
+    }
+
+    /// Delete an action.
+    ///
+    /// Equivalent to
+    /// ```bash
+    /// tc action del action $act_type index $index
+    /// ```
+    pub fn del(&mut self) -> TrafficActionDelRequest {
+        TrafficActionDelRequest::new(self.handle.clone())
     }
 }
