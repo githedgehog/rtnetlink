@@ -34,10 +34,10 @@ pub use crate::ns::{NetworkNamespace, NETNS_PATH, NONE_FS, SELF_NS_PATH};
 pub use crate::traffic_control::{
     QDiscDelRequest, QDiscGetRequest, QDiscHandle, QDiscNewRequest,
     TrafficActionDelRequest, TrafficActionGetRequest, TrafficActionHandle,
-    TrafficActionKind, TrafficActionNewRequest, TrafficChainGetRequest,
-    TrafficChainHandle, TrafficChainNewRequest, TrafficClassGetRequest,
-    TrafficClassHandle, TrafficFilterGetRequest, TrafficFilterHandle,
-    TrafficFilterNewRequest,
+    TrafficActionKind, TrafficActionNewRequest, TrafficChainDelRequest,
+    TrafficChainGetRequest, TrafficChainHandle, TrafficChainNewRequest,
+    TrafficClassGetRequest, TrafficClassHandle, TrafficFilterGetRequest,
+    TrafficFilterHandle, TrafficFilterNewRequest,
 };
 pub use crate::{
     addr::{
