@@ -34,8 +34,9 @@ pub use crate::traffic_control::{
     QDiscDelRequest, QDiscGetRequest, QDiscHandle, QDiscNewRequest,
     TrafficActionDelRequest, TrafficActionGetRequest, TrafficActionHandle,
     TrafficActionKind, TrafficActionNewRequest, TrafficChainGetRequest,
-    TrafficChainHandle, TrafficClassGetRequest, TrafficClassHandle,
-    TrafficFilterGetRequest, TrafficFilterHandle, TrafficFilterNewRequest,
+    TrafficChainHandle, TrafficChainNewRequest, TrafficClassGetRequest,
+    TrafficClassHandle, TrafficFilterGetRequest, TrafficFilterHandle,
+    TrafficFilterNewRequest,
 };
 pub use crate::{
     addr::{

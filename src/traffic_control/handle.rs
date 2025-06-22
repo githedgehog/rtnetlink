@@ -3,6 +3,8 @@
 use netlink_packet_core::{NLM_F_CREATE, NLM_F_EXCL, NLM_F_REPLACE};
 use netlink_packet_route::tc::TcMessage;
 
+use crate::{Handle, TrafficActionDelRequest, TrafficActionGetRequest, TrafficActionNewRequest, TrafficChainNewRequest};
+
 use super::{
     QDiscDelRequest, QDiscGetRequest, QDiscNewRequest, TrafficChainGetRequest,
     TrafficClassGetRequest, TrafficFilterDelRequest, TrafficFilterGetRequest,
@@ -140,6 +142,10 @@ pub struct TrafficChainHandle {
 impl TrafficChainHandle {
     pub fn new(handle: Handle, ifindex: i32) -> Self {
         TrafficChainHandle { handle, ifindex }
+    }
+    
+    pub fn add(&mut self) -> TrafficChainNewRequest {
+        TrafficChainNewRequest::new(self.handle.clone(), self.ifindex)
     }
 
     /// Retrieve the list of chain (equivalent to
