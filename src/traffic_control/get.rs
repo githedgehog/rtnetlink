@@ -5,10 +5,7 @@ use futures::{
     FutureExt,
 };
 use netlink_packet_core::{NetlinkMessage, NLM_F_DUMP, NLM_F_REQUEST};
-use netlink_packet_route::tc::{
-    TcAction, TcActionAttribute, TcActionMessage, TcActionMessageAttribute,
-    TcActionMessageFlags, TcActionMessageFlagsWithSelector,
-};
+use netlink_packet_route::tc::{TcAction, TcActionAttribute, TcActionMessage, TcActionMessageAttribute, TcActionMessageFlags, TcActionMessageFlagsWithSelector, TcAttribute};
 use netlink_packet_route::{
     tc::{TcHandle, TcMessage},
     AddressFamily, RouteNetlinkMessage,
