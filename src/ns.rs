@@ -13,8 +13,6 @@ use nix::{
 };
 
 use crate::Error;
-use std::{path::Path, process::exit};
-use std::os::fd::AsFd;
 
 // if "only" smol or smol+tokio were enabled, we use smol because
 // it doesn't require an active tokio runtime - just to be sure.
