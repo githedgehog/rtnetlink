@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-use std::{os::fd::BorrowedFd, path::Path, process::exit};
+use std::{path::Path, process::exit};
 
 use nix::{
     fcntl::OFlag,
@@ -13,7 +13,6 @@ use nix::{
 };
 
 use crate::Error;
-use std::{path::Path, process::exit};
 use std::os::fd::AsFd;
 
 // if "only" smol or smol+tokio were enabled, we use smol because
@@ -333,10 +332,7 @@ impl NetworkNamespace {
         }
 
         setns_flags.insert(CloneFlags::CLONE_NEWNET);
-        if let Err(e) = nix::sched::setns(
-            unsafe { fd.as_fd() },
-            setns_flags,
-        ) {
+        if let Err(e) = nix::sched::setns(unsafe { fd.as_fd() }, setns_flags) {
             log::error!("setns error: {}", e);
             let err_msg = format!("setns error: {e}");
             let _ = nix::unistd::unlink(ns_path);

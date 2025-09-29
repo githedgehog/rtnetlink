@@ -2,7 +2,7 @@
 use futures::{
     future::{self, Either},
     stream::{Stream, StreamExt},
-    FutureExt,
+    FutureExt, TryStream,
 };
 use netlink_packet_core::{NetlinkMessage, NLM_F_DUMP, NLM_F_REQUEST};
 use netlink_packet_route::tc::{

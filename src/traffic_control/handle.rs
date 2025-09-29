@@ -13,10 +13,6 @@ use super::{
     TrafficClassGetRequest, TrafficFilterDelRequest, TrafficFilterGetRequest,
     TrafficFilterNewRequest,
 };
-use crate::{
-    Handle, TrafficActionDelRequest, TrafficActionGetRequest,
-    TrafficActionNewRequest,
-};
 
 #[derive(Debug, Clone)]
 pub struct QDiscHandle(Handle);
@@ -189,7 +185,7 @@ impl TrafficActionHandle {
     /// Equivalent to
     /// ```bash
     /// tc action add action $act_type $act_options index $index
-    /// ```    
+    /// ```
     pub fn add(&mut self) -> TrafficActionNewRequest {
         TrafficActionNewRequest::new(self.handle.clone())
     }
