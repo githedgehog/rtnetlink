@@ -2,7 +2,7 @@
 
 use crate::{
     packet_route::link::{
-        BridgeMulticastRouterType, BridgePortState, InfoBridgePort,
+        BridgePortMulticastRouter, BridgePortState, InfoBridgePort,
         InfoPortData, InfoPortKind,
     },
     LinkMessageBuilder,
@@ -102,7 +102,7 @@ impl LinkMessageBuilder<LinkBridgePort> {
 
     /// This is equivalent to
     /// `ip link set name NAME type bridge_slave mcast_router MULTICAST_ROUTER`.
-    pub fn mcast_router(self, v: BridgeMulticastRouterType) -> Self {
+    pub fn mcast_router(self, v: BridgePortMulticastRouter) -> Self {
         self.append_info_data(InfoBridgePort::MulticastRouter(v))
     }
 

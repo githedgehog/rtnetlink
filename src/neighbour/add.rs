@@ -62,7 +62,7 @@ impl NeighbourAddRequest {
 
         message
             .attributes
-            .push(NeighbourAttribute::LinkLayerAddress(lla.to_vec()));
+            .push(NeighbourAttribute::LinkLocalAddress(lla.to_vec()));
 
         NeighbourAddRequest {
             handle,
@@ -110,7 +110,7 @@ impl NeighbourAddRequest {
                 .attributes
                 .iter_mut()
                 .find_map(|nla| match nla {
-                    NeighbourAttribute::LinkLayerAddress(lla) => Some(lla),
+                    NeighbourAttribute::LinkLocalAddress(lla) => Some(lla),
                     _ => None,
                 });
 
@@ -119,7 +119,7 @@ impl NeighbourAddRequest {
         } else {
             self.message
                 .attributes
-                .push(NeighbourAttribute::LinkLayerAddress(addr.to_vec()));
+                .push(NeighbourAttribute::LinkLocalAddress(addr.to_vec()));
         }
 
         self

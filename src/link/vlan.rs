@@ -2,7 +2,7 @@
 
 use crate::{
     packet_route::link::{
-        InfoData, InfoKind, InfoVlan, VlanFlags, VlanProtocol, VlanQosMapping,
+        InfoData, InfoKind, InfoVlan, VlanProtocol, VlanQosMapping,
     },
     LinkMessageBuilder,
 };
@@ -88,7 +88,7 @@ impl LinkMessageBuilder<LinkVlan> {
     }
 
     /// VLAN flags
-    pub fn flags(self, flags: VlanFlags, mask: VlanFlags) -> Self {
+    pub fn flags(self, flags: u32, mask: u32) -> Self {
         self.append_info_data(InfoVlan::Flags((flags, mask)))
     }
 
