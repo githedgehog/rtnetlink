@@ -25,7 +25,7 @@ thiserror = "2"
 netlink-sys = { version = "0.8" }
 netlink-packet-utils = { version = "0.6.0" }
 netlink-packet-core = { version = "0.8" }
-netlink-packet-route = { git = "https://github.com/githedgehog/netlink-packet-route.git", branch = "pr/daniel-noland/swing5", default-features = false, features = [] }
+netlink-packet-route = { git = "https://github.com/githedgehog/netlink-packet-route.git", branch = "pr/daniel-noland/swing6", default-features = false, features = [] }
 netlink-proto = { default-features = false, version = "0.12.0" }
 nix = { version = "0.31.3", default-features = false, features = ["fs", "mount", "sched", "signal"] }
 tokio = { version = "1.52.3", features = ["rt"], optional = true}
