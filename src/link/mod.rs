@@ -15,7 +15,6 @@ mod handle;
 mod mac_vlan;
 mod mac_vtap;
 mod macsec;
-mod netkit;
 mod nlmon;
 mod property_add;
 mod property_del;
@@ -23,7 +22,6 @@ mod set;
 mod veth;
 mod vlan;
 mod vrf;
-mod vxcan;
 mod vxlan;
 mod wireguard;
 mod xfrm;
@@ -42,7 +40,6 @@ pub use self::{
     mac_vlan::LinkMacVlan,
     mac_vtap::LinkMacVtap,
     macsec::LinkMacSec,
-    netkit::LinkNetkit,
     nlmon::LinkNlmon,
     property_add::LinkNewPropRequest,
     property_del::LinkDelPropRequest,
@@ -50,7 +47,6 @@ pub use self::{
     veth::LinkVeth,
     vlan::{LinkVlan, QosMapping},
     vrf::LinkVrf,
-    vxcan::LinkVxcan,
     vxlan::LinkVxlan,
     wireguard::LinkWireguard,
     xfrm::LinkXfrm,
