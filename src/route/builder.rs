@@ -8,7 +8,7 @@ use std::{
 #[cfg(not(target_os = "android"))]
 use netlink_packet_route::route::{
     MplsLabel, RouteLwEnCapType, RouteLwTunnelEncap, RouteMplsIpTunnel,
-    RouteSeg6IpTunnel, Seg6Header, Seg6Mode,
+    Seg6Mode,
 };
 use netlink_packet_route::{
     route::{
@@ -90,29 +90,13 @@ impl<T> RouteMessageBuilder<T> {
 
     /// Sets the output SRv6 encapsulation segments.
     #[cfg(not(target_os = "android"))]
-    pub fn output_seg6(
-        mut self,
-        mode: Seg6Mode,
-        segments: Vec<Ipv6Addr>,
-    ) -> Self {
-        if segments.is_empty() {
-            return self;
-        }
-        self.message
-            .attributes
-            .push(RouteAttribute::EncapType(RouteLwEnCapType::Seg6));
-
-        let mut header = Seg6Header::default();
-        header.mode = mode;
-        header.segments = segments;
-
-        let encap = RouteLwTunnelEncap::Seg6(RouteSeg6IpTunnel::Seg6(header));
-
-        self.message
-            .attributes
-            .push(RouteAttribute::Encap(vec![encap]));
-
-        self
+    pub fn output_seg6(self, mode: Seg6Mode, segments: Vec<Ipv6Addr>) -> Self {
+        // TODO(swing5): `Seg6Header` is `#[non_exhaustive]` with no public
+        // constructor in netlink-packet-route swing5, so it cannot be built
+        // from here. Restore the real implementation once swing5 exposes one
+        // (a `Default`/`pub fn new`, or drops `#[non_exhaustive]`).
+        let _ = (mode, segments);
+        todo!("Seg6Header construction is blocked on a swing5 constructor")
     }
 
     /// Sets multiple nexthop entries for the route.
