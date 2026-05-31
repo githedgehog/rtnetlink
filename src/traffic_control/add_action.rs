@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
-use futures::future::Either;
-use futures::{future, FutureExt, StreamExt, TryStream};
+use futures_util::future::Either;
+use futures_util::{future, FutureExt, StreamExt, TryStream};
 use netlink_packet_core::{
     NetlinkMessage, NLM_F_ACK, NLM_F_EXCL, NLM_F_REQUEST,
 };

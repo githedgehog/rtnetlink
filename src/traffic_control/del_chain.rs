@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 use crate::{try_nl, Error, Handle};
-use futures::stream::StreamExt;
+use futures_util::stream::StreamExt;
 use netlink_packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST};
 use netlink_packet_route::tc::{TcAttribute, TcHeader};
 use netlink_packet_route::{
