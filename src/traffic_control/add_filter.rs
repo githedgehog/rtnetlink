@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 use futures_util::stream::StreamExt;
+use netlink_packet_route::tc::{TcFilterFlower, TcFilterFlowerOption};
 
 use crate::{
     packet_core::{NetlinkMessage, NLM_F_ACK, NLM_F_REQUEST},
@@ -57,6 +58,12 @@ impl TrafficFilterNewRequest {
     /// Equivalent to `dev STRING`, dev and block are mutually exlusive.
     pub fn index(mut self, index: i32) -> Self {
         self.message.header.index = index;
+        self
+    }
+
+    /// Set the id of the filter
+    pub fn handle(mut self, handle: u32) -> Self {
+        self.message.header.handle = TcHandle::from(handle);
         self
     }
 
@@ -143,6 +150,36 @@ impl TrafficFilterNewRequest {
         }
         self.message.attributes.push(TcAttribute::Options(nla_opts));
         Ok(self)
+    }
+
+    pub fn flower(
+        mut self,
+        options: &[TcFilterFlowerOption],
+    ) -> Result<Self, Error> {
+        if self
+            .message
+            .attributes
+            .iter()
+            .any(|nla| matches!(nla, TcAttribute::Kind(_)))
+        {
+            return Err(Error::InvalidNla(
+                "message kind has already been set.".to_string(),
+            ));
+        }
+        self.message
+            .attributes
+            .push(TcAttribute::Kind(TcFilterFlower::KIND.to_string()));
+        let nla_opts: Vec<_> = options
+            .iter()
+            .map(|opt| TcOption::Flower(opt.clone()))
+            .collect();
+        self.message.attributes.push(TcAttribute::Options(nla_opts));
+        Ok(self)
+    }
+
+    pub fn chain(mut self, chain: u32) -> Self {
+        self.message.attributes.push(TcAttribute::Chain(chain));
+        self
     }
 
     /// Use u32 to implement traffic redirect.

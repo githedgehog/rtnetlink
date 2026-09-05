@@ -23,7 +23,9 @@ futures-channel = "0.3.11"
 log = "0.4.8"
 thiserror = "2"
 netlink-sys = { version = "0.9" }
-netlink-packet-route = { version = "0.33" }
+# tc blocks and generic actions are not upstream yet; see the
+# `hh/tc-blocks-and-gact` branch of githedgehog/netlink-packet-route.
+netlink-packet-route = { git = "https://github.com/githedgehog/netlink-packet-route.git", branch = "hh/tc-blocks-and-gact" }
 netlink-packet-core = { version = "0.9" }
 netlink-proto = { default-features = false, version = "0.13" }
 nix = { version = "0.31.3", default-features = false, features = ["fs", "mount", "sched", "signal"] }
